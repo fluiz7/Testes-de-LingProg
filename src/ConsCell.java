@@ -37,15 +37,13 @@ public class ConsCell {
 
     /**
      * Mutator for the tail of this ConsCell.
-     *
      * @param t the new tail for this cell
-     * @return
      */
-    public ConsCell setTail(ConsCell t) {
+    public void setTail(ConsCell t) {
         tail = t;
-        return t;
+    }
     }
 
-}
+
 
 

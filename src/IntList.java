@@ -32,4 +32,36 @@ public class IntList {
         }
         return len;
     }
+    /**
+     * Print ourselves to System.out.
+     */
+    public void print() {
+        System.out.print("[");
+        ConsCell a = start;
+        while (a != null) {
+            System.out.print(a.getHead());
+            a = a.getTail();
+            if (a != null) System.out.print(",");
+        }
+        System.out.println("]");
+        }
+    /**
+     * Add one element to the end of IntList.
+     * @return a new list.
+     */
+    public IntList append(ConsCell y) {
+        ConsCell cell = start;
+        IntList x = new IntList(null);
+        while (cell.getTail() != null) {
+            x.cons(cell.getHead());
+            cell = cell.getTail();
+        }
+        cell.setTail(y);
+        while (cell != null) {
+            x.cons(cell.getHead());
+            cell = cell.getTail();
+        }
+        return  x;
+    }
 }
+
