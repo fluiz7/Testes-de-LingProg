@@ -2,25 +2,31 @@
  * An IntList is a list of ints.
  */
 public class IntList {
-    private ConsCell start; // list head, or null
+    private final ConsCell start; // list head, or null
+
     /**
      * Construct a new IntList given its first ConsCell.
+     *
      * @param s the first ConsCell in the list, or null
      */
     public IntList(ConsCell s) {
         start = s;
     }
+
     /**
      * Cons the given element h onto us and return the
      * resulting IntList.
+     *
      * @param h the head int for the new list
      * @return the IntList with head h, and us as tail
      */
-    public IntList cons (int h) {
-        return new IntList(new ConsCell(h,start));
+    public IntList cons(int h) {
+        return new IntList(new ConsCell(h, start));
     }
+
     /**
      * Get our length.
+     *
      * @return our int length
      */
     public int length() {
@@ -32,6 +38,7 @@ public class IntList {
         }
         return len;
     }
+
     /**
      * Print ourselves to System.out.
      */
@@ -44,24 +51,46 @@ public class IntList {
             if (a != null) System.out.print(",");
         }
         System.out.println("]");
-        }
+    }
+
     /**
      * Add one element to the end of IntList.
+     *
      * @return a new list.
      */
-    public IntList append(ConsCell y) {
+    public IntList append(IntList y) {
         ConsCell cell = start;
         IntList x = new IntList(null);
         while (cell.getTail() != null) {
             x.cons(cell.getHead());
             cell = cell.getTail();
         }
-        cell.setTail(y);
+        cell.setTail(y.start);
         while (cell != null) {
             x.cons(cell.getHead());
             cell = cell.getTail();
         }
-        return  x;
+        return x;
     }
+
+    /**
+     * Add an element recursively to the end of IntList.
+     *
+     * @return a new list.
+     */
+    public IntList appendR(IntList y) {
+        IntList x = y;
+        if (start.getTail() != null){
+            x = x.cons(start.getHead());
+        }
+        else{
+            IntList z = new IntList(start.getTail());
+            return x.appendR(z);
+        }
+        return x;
+    }
+
 }
+
+
 
