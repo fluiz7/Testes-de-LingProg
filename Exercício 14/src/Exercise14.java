@@ -3,6 +3,7 @@ public class Exercise14{
         System.out.printf("Mr Chekov, warp 4, engage ...\n\n");
 
         HeapManager m = new HeapManager(new int[10]);
+        // BestFit m = new BestFit(new int[10]);
 
         int p1, p2, p3;
 

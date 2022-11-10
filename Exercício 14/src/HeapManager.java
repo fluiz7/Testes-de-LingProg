@@ -28,9 +28,11 @@ class HeapManager {
         int p = freeStart; // head of free list
         int lag = NULL;
 
+
         while (p != NULL && memory[p] < size) {
             lag = p; // lag is previous p
             p = memory[p + 1]; // link to next block
+
         }
         if (p == NULL) // no block large enough
             throw new OutOfMemoryError();
@@ -40,6 +42,7 @@ class HeapManager {
         // free list, or NULL, and nextFree is the index of p's successor in the free list, or NULL.
         // If the block has more space than we need, carve out what we need from the front and return the
         // unused end part to the free list.
+
         int unused = memory[p] - size; // extra space
         if (unused > 1) { // if more than a header's worth
             nextFree = p + size; // index of the unused piece

@@ -27,32 +27,48 @@ class BestFit {
         // Do first-fit search: linear search of the free list for the first block of sufficient size.
         int p = freeStart; // head of free list
         int lag = NULL;
+        int bestp = memory[p];
 
-        while (p != NULL && memory[p] < size) {
+        while (p != NULL) {
             lag = p; // lag is previous p
-            p = memory[p + 1]; // link to next block
+            if (memory[p] == size) {
+                bestp = p;
+                System.out.println("bla");
+                return bestp;
+            } else if (memory[p] > size && memory[p] < bestp) {
+                bestp = p;
+                System.out.println("ble");
+                return  bestp;
+            } else {
+                System.out.println(p);
+                p = memory[p + 1];
+                System.out.println(p);
+
+            }
+
+
         }
         if (p == NULL) // no block large enough
             throw new OutOfMemoryError();
 
-        int nextFree = memory[p + 1]; // block after p
+        int nextFree = memory[bestp + 1]; // block after p
         // Now p is the index of a block of sufficient size, and lag is the index of p's predecessor in the
         // free list, or NULL, and nextFree is the index of p's successor in the free list, or NULL.
         // If the block has more space than we need, carve out what we need from the front and return the
         // unused end part to the free list.
-        int unused = memory[p] - size; // extra space
+        int unused = memory[bestp] - size; // extra space
         if (unused > 1) { // if more than a header's worth
-            nextFree = p + size; // index of the unused piece
+            nextFree = bestp + size; // index of the unused piece
             memory[nextFree] = unused; // fill in size
-            memory[nextFree + 1] = memory[p + 1]; // fill in link
-            memory[p] = size; // reduce p's size accordingly
+            memory[nextFree + 1] = memory[bestp + 1]; // fill in link
+            memory[bestp] = size; // reduce p's size accordingly
         }
 
         // Link out the block we are allocating and done.
         if (lag == NULL) freeStart = nextFree;
         else memory[lag + 1] = nextFree;
 
-        return p + 1; // index of useable word (after header)
+        return bestp + 1; // index of useable word (after header)
     }
 
     /**
