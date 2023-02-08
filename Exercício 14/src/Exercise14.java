@@ -2,8 +2,8 @@ public class Exercise14{
     public static void main(String[] args) {
         System.out.printf("Mr Chekov, warp 4, engage ...\n\n");
 
-        HeapManager m = new HeapManager(new int[10]);
-        // BestFit m = new BestFit(new int[10]);
+        // Exercício 14 referente a alteração para a letra (a).
+        BestFit m = new BestFit(new int[10]);
 
         int p1, p2, p3;
 
@@ -28,6 +28,32 @@ public class Exercise14{
         p3=m.allocate(7);
         System.out.printf("\np3 = %d, size = %d\n",p3,7);
         m.echo();
+
+
+        // Exercício 14 referente a alteração para a letra (b), de modo a dar erro no first e certo no best.
+
+        BestFit mm = new BestFit(new int[7]);
+        int a = mm.allocate(2);
+        int b = mm.allocate(1);
+        int c = mm.allocate(1);
+        mm.deallocate(a);
+        mm.deallocate(c);
+        int d = mm.allocate(1);
+        int e = mm.allocate(2);
+
+        // Exercício 14 referente a alteração para a letra (c), de modo a dar erro no best e certo no first.
+
+        //BestFit mm = new BestFit(new int[11]);
+
+        //int a = mm.allocate(4);
+        //int b = mm.allocate(1);
+        //int c = mm.allocate(3);
+        //mm.deallocate(a);
+        //mm.deallocate(c);
+        //int d = mm.allocate(2);
+        //int e = mm.allocate(1);
+        //int f = mm.allocate(3);
+        //mm.echo();
 
         System.out.printf("\nDropping warp.\n");
     }
